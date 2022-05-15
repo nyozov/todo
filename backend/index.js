@@ -17,16 +17,27 @@ MongoClient.connect(uri ,
   if (err) return console.error(err)
   console.log('Connected to Database')
   const db = client.db('todo')
+  const tasksCollection = db.collection('tasks')
 
   app.use(cors());
 
   app.use(express.json())
   app.get('/', (req, res) => {
-    db.collection('tasks').find().toArray()
+    tasksCollection.find().toArray()
       .then(tasks => {
-        res.json({ tasks: tasks })
+        res.json(tasks)
       })
       .catch(/* ... */)
+  })
+
+  app.post('/tasks', (req, res) => {
+    tasksCollection.insertOne(req.body)
+    .then(result => {
+      console.log(result)
+    })
+    .catch(err => {
+      console.log(err)
+    })
   })
 
 })
