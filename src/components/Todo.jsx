@@ -5,6 +5,7 @@ import Modal from "./Modal";
 
 export const Todo = () => {
   const [openModal, setOpenModal] = useState(false);
+
  
   const [tasks, setTasks] = useState([]);
   useEffect(() => {

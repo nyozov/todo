@@ -1,20 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
+import { DeleteModal } from "./DeleteModal";
 
 export const TaskTable = ({ tasks, setTasks }) => {
-  const handleDelete = (taskId) => {
-  
-      axios.delete("http://localhost:5000/tasks", {
-        data: { taskId }
-  })
-   
 
+  const [openDelete, setOpenDelete] = useState(false);
   
-        console.log('deleted')
-        setTasks(tasks.filter(task => task._id !== taskId))
-    
-    
-  };
 
   return (
     <div>
@@ -70,11 +61,12 @@ export const TaskTable = ({ tasks, setTasks }) => {
 
                     <td className="px-7 2xl:px-0">
                       <button
-                        onClick={() => handleDelete(task._id)}
+                        onClick={() => setOpenDelete(true)}
                         className="rounded text-gray-200 bg-red-500 hover:bg-red-600 p-2 shadow"
                       >
                         Delete
                       </button>
+                      {openDelete && <DeleteModal taskName={task.name} taskId={task._id} openDelete={openDelete} setOpenDelete={setOpenDelete} tasks={tasks} setTasks={setTasks}/>}
                     </td>
                   </tr>
                 </tbody>

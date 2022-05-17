@@ -11,32 +11,28 @@ function Modal({ setOpenModal, setTasks }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-
-      const resp = await axios.post('http://localhost:5000/tasks', {
+      const resp = await axios.post("http://localhost:5000/tasks", {
         name: formResults,
-        status: "Todo"
-      })
+        status: "Todo",
+      });
 
-      console.log(resp.data)
+      console.log(resp.data);
       if (resp.data.acknowledged) {
         try {
-          const resp2 = await axios.get('http://localhost:5000/')
-          console.log('resp2', resp2)
+          const resp2 = await axios.get("http://localhost:5000/");
+          console.log("resp2", resp2);
 
-          if (resp2.status === 200){
-            setTasks(resp2.data)
-            setOpenModal(false)
-            
-
+          if (resp2.status === 200) {
+            setTasks(resp2.data);
+            setOpenModal(false);
           }
-
         } catch (error) {
-          
+          console.error(error)
         }
-       
       }
-      
-    } catch (error) {}
+    } catch (error) {
+      console.error(error)
+    }
   };
   return (
     <>
