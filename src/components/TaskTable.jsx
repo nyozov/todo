@@ -3,8 +3,17 @@ import axios from "axios";
 import { DeleteModal } from "./DeleteModal";
 
 export const TaskTable = ({ tasks, setTasks }) => {
+  const [taskDeleteId, setTaskDeleteId] = useState('')
+  const [taskDeleteName, setTaskDeleteName] = useState('')
 
   const [openDelete, setOpenDelete] = useState(false);
+
+  const handleDeleteOpen = (id, name) => {
+    setTaskDeleteId(id)
+    setTaskDeleteName(name)
+    setOpenDelete(true)
+
+  }
   
 
   return (
@@ -61,12 +70,12 @@ export const TaskTable = ({ tasks, setTasks }) => {
 
                     <td className="px-7 2xl:px-0">
                       <button
-                        onClick={() => setOpenDelete(true)}
+                        onClick={() => handleDeleteOpen(task._id, task.name)}
                         className="rounded text-gray-200 bg-red-500 hover:bg-red-600 p-2 shadow"
                       >
                         Delete
                       </button>
-                      {openDelete && <DeleteModal taskName={task.name} taskId={task._id} openDelete={openDelete} setOpenDelete={setOpenDelete} tasks={tasks} setTasks={setTasks}/>}
+                      {openDelete && <DeleteModal taskDeleteName={taskDeleteName} taskDeleteId={taskDeleteId} taskName={task.name} taskId={task._id} openDelete={openDelete} setOpenDelete={setOpenDelete} tasks={tasks} setTasks={setTasks}/>}
                     </td>
                   </tr>
                 </tbody>

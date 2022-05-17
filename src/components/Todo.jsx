@@ -11,7 +11,7 @@ export const Todo = () => {
   useEffect(() => {
     axios.get("http://localhost:5000/").then((res) => {
       console.log("test", res.data);
-      setTasks(res.data);
+      setTasks(res.data.reverse());
     });
   }, []);
 
@@ -43,8 +43,8 @@ export const Todo = () => {
       </div>
       
       <div>
-        <h1>Tasks</h1>
-        <hr />
+       
+     
         <>
           <TaskTable tasks={tasks} setTasks={setTasks} />
         </>

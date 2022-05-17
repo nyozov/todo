@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 
-export const DeleteModal = ({setOpenDelete, openDelete, tasks, setTasks, taskId, taskName}) => {
+export const DeleteModal = ({setOpenDelete, openDelete, tasks, setTasks, taskDeleteName, taskDeleteId}) => {
 
   const handleDelete = (taskId) => {
     axios.delete("http://localhost:5000/tasks", {
@@ -35,7 +35,7 @@ export const DeleteModal = ({setOpenDelete, openDelete, tasks, setTasks, taskId,
                   </button>
                 </div>
                 <div className="px-4 md:px-10 pt-6 md:pt-12 md:pb-4 pb-7">
-                  <p>Are you sure you want to delete task {`${taskName}`}? </p>
+                  <p>Are you sure you want to delete task {taskDeleteName}? </p>
                   <div className="mt-11">
                     
                    
@@ -50,7 +50,7 @@ export const DeleteModal = ({setOpenDelete, openDelete, tasks, setTasks, taskId,
                       Cancel
                     </button>
                     <button
-                    onClick={()=>handleDelete(taskId)}
+                    onClick={()=>handleDelete(taskDeleteId)}
                       type="submit"
                       className="px-6 py-3 bg-red-700 hover:bg-opacity-80 shadow rounded text-sm text-white"
                     >

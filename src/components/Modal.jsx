@@ -23,7 +23,7 @@ function Modal({ setOpenModal, setTasks }) {
           console.log("resp2", resp2);
 
           if (resp2.status === 200) {
-            setTasks(resp2.data);
+            setTasks(resp2.data.reverse());
             setOpenModal(false);
           }
         } catch (error) {
