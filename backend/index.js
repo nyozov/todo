@@ -1,5 +1,5 @@
 const { MongoClient, ServerApiVersion } = require("mongodb");
-const ObjectId = require('mongodb').ObjectId
+const ObjectId = require("mongodb").ObjectId;
 const cors = require("cors");
 const express = require("express");
 const app = express();
@@ -39,22 +39,23 @@ MongoClient.connect(
       tasksCollection
         .insertOne(req.body)
         .then((result) => {
-          res.send(result )
+          res.send(result);
           console.log(result);
-          
         })
         .catch((err) => {
           console.log(err);
         });
     });
-    app.delete('/tasks', (req, res) => {
-      
-        console.log(req.body.taskId)
-        tasksCollection.deleteOne({ _id: ObjectId(req.body.taskId.toString())})
-      
-      
-     
+    app.delete("/tasks", (req, res) => {
+      console.log(req.body.taskId);
+      tasksCollection.deleteOne({ _id: ObjectId(req.body.taskId.toString()) });
+    });
+
+    app.put("/task", (req, res) => {
+      console.log('update =', req.body)
     })
+
+
   }
 );
 

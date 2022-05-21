@@ -1,8 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 
-function Modal({ setOpenModal, setTasks }) {
+function Modal({ setOpenModal, setTasks, setAddedTooltip }) {
   const [formResults, setFormResults] = useState("");
+  
 
   const handleChange = (e) => {
     setFormResults(e.target.value);
@@ -25,6 +26,11 @@ function Modal({ setOpenModal, setTasks }) {
           if (resp2.status === 200) {
             setTasks(resp2.data.reverse());
             setOpenModal(false);
+            setAddedTooltip(true)
+            setTimeout(() => {
+              setAddedTooltip(false)
+              
+            }, 2000);
           }
         } catch (error) {
           console.error(error)

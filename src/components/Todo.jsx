@@ -5,7 +5,7 @@ import Modal from "./Modal";
 
 export const Todo = () => {
   const [openModal, setOpenModal] = useState(false);
-
+  const [addedTooltip, setAddedTooltip] = useState(false);
  
   const [tasks, setTasks] = useState([]);
   useEffect(() => {
@@ -35,8 +35,11 @@ export const Todo = () => {
                 New Task
               </p>
             </button>
+            {addedTooltip && <div className=' mt-7 ml-3 text-xs absolute bg-green-500 p-1 rounded text-white'>
+              Added new task!
+              </div>}
             {openModal && (
-              <Modal setOpenModal={setOpenModal} setTasks={setTasks} />
+              <Modal setAddedTooltip={setAddedTooltip} setOpenModal={setOpenModal} setTasks={setTasks} />
             )}
           </div>
         </div>
